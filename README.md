@@ -32,7 +32,7 @@ Login with `user-1` through to `user-5`. Be patient for the dyno to wake up.
 
 - The logo doesn't look great on Mac
 - Error status codes sent by backend are incorrect (backend is also a bit messy)
-- No secruity, proper login handling, or passwords
+- No security, proper login handling, or passwords
 - No UI for user creation - do this directly on the DB
 
 ## Screenshots
