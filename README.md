@@ -5,8 +5,6 @@
 A beautiful and unoriginal board game! Hop on a call with your friends to show off your vocabulary. Play your moves with real-time feedback. Or do it correspondence style and play at your own pace!
 
 ![](/markdown-assets/game.png)
-![](/markdown-assets/new-game.jpg)
-![](/markdown-assets/confetti.jpg)
 
 Built to simulate the fun environment of playing with physical board and tiles - no silly ads, look words up for yourself, and argue over them!
 
@@ -36,3 +34,8 @@ Login with `user-1` through to `user-5`. Be patient for the dyno to wake up.
 - Error status codes sent by backend are incorrect (backend is also a bit messy)
 - No secruity, proper login handling, or passwords
 - No UI for user creation - do this directly on the DB
+
+## Screenshots
+
+![](/markdown-assets/new-game.jpg)
+![](/markdown-assets/confetti.jpg)
