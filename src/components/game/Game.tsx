@@ -25,6 +25,8 @@ import { TileSet } from '../../constants/tile-defaults';
 import { useDispatch } from 'react-redux';
 import { socketUpdateGame } from '../../store/game-data/actions';
 import { socket } from '../../components/protected/ProtectedHandler';
+import { TouchBackend } from 'react-dnd-touch-backend';
+import { isMobile } from 'react-device-detect';
 
 export const useStyles = makeStyles<Theme>(theme => ({
 	root: {
@@ -170,7 +172,7 @@ const NewGame = () => {
 
 export const Game = ({ match }: RouteComponentProps) => {
 	return (
-		<DndProvider backend={HTML5Backend}>
+		<DndProvider backend={isMobile ? TouchBackend : HTML5Backend}>
 			<Switch>
 				<Route path={match.url + ROUTES.game.params} component={ExistingGame} />
 				<Route path={match.url} component={NewGame} />
