@@ -112,7 +112,12 @@ app
     .get((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { username } = req.params;
     const profile = yield player_service_1.handleGetProfile(username);
-    res.json(profile);
+    if (profile) {
+        res.json(profile);
+    }
+    else {
+        res.sendStatus(401);
+    }
 }))
     .post((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { username } = req.params;
