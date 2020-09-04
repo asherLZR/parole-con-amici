@@ -4,7 +4,7 @@
 
 A beautiful and unoriginal board game! Hop on a call with your friends to show off your vocabulary. Play your moves with real-time feedback. Or do it correspondence style and play at your own pace!
 
-![](/markdown-assets/game.png)
+![](/markdown-assets/game.jpg)
 
 Built to simulate the fun environment of playing with physical board and tiles - no silly ads, look words up for yourself, and argue over them!
 
