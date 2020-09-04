@@ -38,6 +38,10 @@ io.on('connection', function (socket) {
         socket.join(username);
         console.log(username, 'has joined a room!');
     });
+    socket.on(socket_1.SocketTypes.LEAVE, (username) => {
+        socket.leave(username);
+        console.log(username, 'has left a room!');
+    });
 });
 // TODO: throw correct errors and clean up status codes - 400, 404, and 500 for all endpoints
 app.route('/games/:username').get((req, res) => __awaiter(void 0, void 0, void 0, function* () {

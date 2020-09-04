@@ -12,7 +12,6 @@ import {
 import { handleCreateNewGame } from './services/new-game/new-game';
 import cors from 'cors';
 import { SocketTypes } from '../src/constants/socket';
-import { profile } from 'console';
 
 const app = express();
 const http = require('http').Server(app);
@@ -37,6 +36,10 @@ io.on('connection', function (socket: any) {
 	socket.on(SocketTypes.JOIN, (username: string) => {
 		socket.join(username);
 		console.log(username, 'has joined a room!');
+	});
+	socket.on(SocketTypes.LEAVE, (username: string) => {
+		socket.leave(username);
+		console.log(username, 'has left a room!');
 	});
 });
 

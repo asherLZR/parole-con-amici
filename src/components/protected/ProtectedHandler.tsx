@@ -13,7 +13,12 @@ export const ProtectedHandler = () => {
 	const history = useHistory();
 
 	useEffect(() => {
-		socket.emit(SocketTypes.JOIN, getUsername());
+		const username = getUsername();
+		socket.emit(SocketTypes.JOIN, username);
+
+		return () => {
+			socket.emit(SocketTypes.LEAVE, username);
+		};
 	});
 
 	if (!username) {
