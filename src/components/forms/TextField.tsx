@@ -10,7 +10,7 @@ import { Controller, Control } from 'react-hook-form';
 interface Props extends StandardTextFieldProps {
 	name: string;
 	control: Control;
-	rules: { required: boolean; pattern?: RegExp };
+	rules: Object;
 }
 
 export const TextField = ({

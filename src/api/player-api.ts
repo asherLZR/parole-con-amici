@@ -14,6 +14,6 @@ export const postProfile = (profile: Profile): Promise<Profile> => {
 	}).then(res => res.json());
 };
 
-export const getProfile = (): Promise<Profile> => {
-	return fetchApi(`/player/${getUsername()}`).then(res => res.json());
+export const getProfile = (username: string): Promise<Profile> => {
+	return fetchApi(`/player/${username}`).then(res => res.json());
 };

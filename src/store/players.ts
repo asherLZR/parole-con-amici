@@ -1,11 +1,14 @@
-import { createReducer, createAsyncThunk } from '@reduxjs/toolkit';
+import { createReducer, createAsyncThunk, SerializedError } from '@reduxjs/toolkit';
 import { Player, Profile } from '../types/GameTypes';
 import { getAllPlayers, postProfile, getProfile } from '../api/player-api';
 import { RootState } from './root-reducer';
+import { setUsername } from '../utilities/local-storage';
 
 /**Selectors */
 export const getAllPlayersData = (state: RootState) => state.Players.players;
 export const getProfileData = (state: RootState) => state.Players.profile;
+export const getProfileError = (state: RootState) => state.Players.error;
+export const getProfileIsPending = (state: RootState) => state.Players.isPending;
 
 /**Actions */
 export const handleGetAllPlayers = createAsyncThunk<Record<string, Player>>(
@@ -13,7 +16,7 @@ export const handleGetAllPlayers = createAsyncThunk<Record<string, Player>>(
 	getAllPlayers
 );
 
-export const handleGetProfile = createAsyncThunk<Profile>(
+export const handleGetProfile = createAsyncThunk<Profile, string>(
 	'GET_PROFILE',
 	getProfile
 );
@@ -28,12 +31,14 @@ export interface PlayerState {
 	players: Record<string, Player>;
 	profile?: Profile;
 	isPending: boolean;
+	error?: SerializedError;
 }
 
 const initialState: PlayerState = {
 	players: {},
 	profile: undefined,
 	isPending: false,
+	error: undefined,
 };
 
 export const reducer = createReducer(initialState, builder => {
@@ -70,9 +75,11 @@ export const reducer = createReducer(initialState, builder => {
 	builder.addCase(handleGetProfile.fulfilled, (state, action) => {
 		state.profile = action.payload;
 		state.isPending = false;
+		setUsername(action.meta.arg);
 	});
 
-	builder.addCase(handleGetProfile.rejected, state => {
+	builder.addCase(handleGetProfile.rejected, (state, action) => {
+		state.error = action.error;
 		state.isPending = false;
 	});
 });

@@ -12,6 +12,7 @@ import {
 import { handleCreateNewGame } from './services/new-game/new-game';
 import cors from 'cors';
 import { SocketTypes } from '../src/constants/socket';
+import { profile } from 'console';
 
 const app = express();
 const http = require('http').Server(app);
@@ -119,7 +120,11 @@ app
 	.get(async (req, res) => {
 		const { username } = req.params;
 		const profile = await handleGetProfile(username);
-		res.json(profile);
+		if (profile) {
+			res.json(profile);
+		} else {
+			res.sendStatus(401);
+		}
 	})
 	.post(async (req, res) => {
 		const { username } = req.params;

@@ -9,6 +9,7 @@ import {
 import { useSelector, useDispatch } from 'react-redux';
 import { getProfileData, handleGetProfile } from '../store/players';
 import { hexToEmoji } from '../utilities/hex-to-emoji';
+import { getUsername } from '../utilities/local-storage';
 
 const useStyles = makeStyles<Theme, number>(theme => ({
 	root: {
@@ -71,7 +72,7 @@ export const ProfileEmojiAvatar = ({ size, ...rest }: Props & AvatarProps) => {
 	const dispatch = useDispatch();
 
 	useEffect(() => {
-		dispatch(handleGetProfile());
+		dispatch(handleGetProfile(getUsername()));
 	}, [dispatch]);
 
 	if (!profile?.emoji) {

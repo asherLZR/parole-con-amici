@@ -1,12 +1,24 @@
 import React, { FC, useEffect } from 'react';
-import { makeStyles, Theme, Grid, IconButton } from '@material-ui/core';
+import {
+	makeStyles,
+	Theme,
+	Grid,
+	IconButton,
+	CircularProgress,
+} from '@material-ui/core';
 import { Logo } from '../Logo';
 import { useHistory } from 'react-router-dom';
 import { ROUTES } from '../../routes';
 import { useForm } from 'react-hook-form';
-import { getUsername, setUsername } from '../../utilities/local-storage';
 import { ChevronRightSharp } from '@material-ui/icons';
 import { LandingPageTextField } from './LandingPageTextField';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+	handleGetProfile,
+	getProfileData,
+	getProfileError,
+	getProfileIsPending,
+} from '../../store/players';
 
 const useStyles = makeStyles<Theme>(() => ({
 	root: {
@@ -21,18 +33,21 @@ export interface Inputs {
 export const Landing: FC = () => {
 	const classes = useStyles();
 	const history = useHistory();
-	const username = getUsername();
+	const profile = useSelector(getProfileData);
+	const loginError = useSelector(getProfileError);
+	const isPending = useSelector(getProfileIsPending);
+	const dispatch = useDispatch();
 
-	const { handleSubmit, control } = useForm<Inputs>();
-	const onSubmit = (data: Inputs) => {
-		setUsername(data.username);
+	const { handleSubmit, control, errors } = useForm<Inputs>();
+	const onSubmit = ({ username }: Inputs) => {
+		dispatch(handleGetProfile(username));
 	};
 
 	useEffect(() => {
-		if (username) {
+		if (profile) {
 			history.push(ROUTES.home.path);
 		}
-	}, [history, username]);
+	}, [history, profile]);
 
 	return (
 		<Grid
@@ -48,16 +63,34 @@ export const Landing: FC = () => {
 						<LandingPageTextField
 							name='username'
 							control={control}
-							// TODO: validate bad usernames
-							rules={{ required: true }}
+							rules={{
+								required: { value: true, message: 'Username is required' },
+								pattern: {
+									value: /^[A-Za-z0-9-]+$/i,
+									message: 'Must not contain special characters',
+								},
+							}}
+							error={!!errors.username}
+							label={errors.username?.message ?? ''}
 						/>
 					</Grid>
 					<Grid item>
-						<IconButton type='submit'>
-							<ChevronRightSharp style={{ fontSize: '2.5rem' }} />
+						<IconButton type='submit' disabled={isPending}>
+							{isPending ? (
+								<CircularProgress
+									style={{ width: '2.5rem', height: '2.5rem' }}
+									color='secondary'
+								/>
+							) : (
+								<ChevronRightSharp style={{ fontSize: '2.5rem' }} />
+							)}
 						</IconButton>
 					</Grid>
 				</Grid>
+				<br />
+				<div style={{ height: '1rem' }}>
+					<b>{loginError ? 'Incorrect username 😥' : ''}</b>
+				</div>
 			</form>
 		</Grid>
 	);
