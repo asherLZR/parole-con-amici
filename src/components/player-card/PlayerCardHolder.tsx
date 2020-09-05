@@ -25,8 +25,8 @@ const toPlayerCards = (
 
 	// add player's state to list and sort all players cards by their order of play
 	const states = getSortedPlayers(gameData);
-
 	const currentTurnOrder = getCurrentTurnOrder(gameData);
+	const { winner } = gameData;
 
 	return states.map(player => {
 		const { username, score, turnOrder } = player;
@@ -34,7 +34,7 @@ const toPlayerCards = (
 			username,
 			score,
 			icon: allPlayers[username]?.emoji ?? undefined,
-			border: turnOrder === currentTurnOrder,
+			border: turnOrder === currentTurnOrder && !winner,
 		};
 	});
 };
