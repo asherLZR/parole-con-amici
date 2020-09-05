@@ -4,6 +4,8 @@ import { NavbarMenu } from './NavMenu';
 import { ProfileEmojiAvatar } from '../IconLogo';
 import { Link } from 'react-router-dom';
 import { ROUTES } from '../../routes';
+import { useSelector } from 'react-redux';
+import { getProfileData } from '../../store/players';
 
 export const NAVBAR_SIZE = '3.5rem';
 
@@ -51,6 +53,7 @@ const LOGO_SIZE = 1.5;
 
 export const Navbar = () => {
 	const classes = useStyles();
+	const profile = useSelector(getProfileData);
 
 	return (
 		<Grid container component='nav' className={classes.root}>
@@ -62,7 +65,7 @@ export const Navbar = () => {
 				className={classes.logoContainer}
 			>
 				<Link to={ROUTES.home.path}>
-					<ProfileEmojiAvatar size={LOGO_SIZE} />
+					<ProfileEmojiAvatar emoji={profile?.emoji} size={LOGO_SIZE} />
 				</Link>
 			</Grid>
 			<Grid item className={classes.menu}>

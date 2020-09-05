@@ -29,9 +29,11 @@ const useStyles = makeStyles<Theme, number>(theme => ({
 			left: `${0.75 * size}rem`,
 		};
 	},
-	avatar: {
+	avatar: size => ({
 		backgroundColor: theme.palette.secondary.dark,
-	},
+		width: `${size * 1.7}rem`,
+		height: `${size * 1.7}rem`,
+	}),
 	emoji: {
 		fontSize: size => `${size}rem`,
 	},
@@ -66,23 +68,22 @@ export const IconLogoAvatar = ({ size, ...rest }: Props & AvatarProps) => {
 	);
 };
 
-export const ProfileEmojiAvatar = ({ size, ...rest }: Props & AvatarProps) => {
+export const ProfileEmojiAvatar = ({
+	size,
+	className,
+	emoji,
+	...rest
+}: Props & AvatarProps & { emoji?: string }) => {
 	const classes = useStyles(size);
-	const profile = useSelector(getProfileData);
-	const dispatch = useDispatch();
 
-	useEffect(() => {
-		dispatch(handleGetProfile(getUsername()));
-	}, [dispatch]);
-
-	if (!profile?.emoji) {
+	if (!emoji) {
 		return <IconLogoAvatar size={size} />;
 	}
 
 	return (
-		<Avatar {...rest} className={classes.avatar}>
+		<Avatar {...rest} className={`${classes.avatar} ${className}`}>
 			<span role='img' className={classes.emoji}>
-				{hexToEmoji(profile.emoji)}
+				{hexToEmoji(emoji)}
 			</span>
 		</Avatar>
 	);

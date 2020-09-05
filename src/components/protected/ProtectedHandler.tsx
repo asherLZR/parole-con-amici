@@ -5,12 +5,19 @@ import { ROUTES } from '../../routes';
 import io from 'socket.io-client';
 import { SocketTypes } from '../../constants/socket';
 import { SERVER_URL } from '../../api/fetch';
+import { useDispatch } from 'react-redux';
+import { handleGetProfile } from '../../store/players';
 
 export const socket = io(SERVER_URL);
 
 export const ProtectedHandler = () => {
 	const username = getUsername();
 	const history = useHistory();
+	const dispatch = useDispatch();
+
+	useEffect(() => {
+		dispatch(handleGetProfile(username));
+	}, [dispatch]);
 
 	useEffect(() => {
 		const username = getUsername();
