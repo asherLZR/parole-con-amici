@@ -58,7 +58,7 @@ export const MultipleAutocomplete = ({
 					renderInput={(params: TextFieldProps) => (
 						<TextField
 							{...params}
-							variant='standard'
+							variant='outlined'
 							label={label}
 							classes={classes}
 						/>

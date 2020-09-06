@@ -1,7 +1,7 @@
 import React from 'react';
 import { ROUTES, RouteInfo } from '../../routes';
 import { NavMenuItem } from './NavMenuItem';
-import { Grid, makeStyles, Theme } from '@material-ui/core';
+import { makeStyles, Theme } from '@material-ui/core';
 import { ExitToApp, SvgIconComponent, Face } from '@material-ui/icons';
 
 export const useStyles = makeStyles<Theme>((theme: Theme) => ({

@@ -4,8 +4,8 @@ import {
 	Theme,
 	Paper,
 	Typography,
-	Button,
 	Grid,
+	IconButton,
 } from '@material-ui/core';
 import { useForm } from 'react-hook-form';
 import { usePlayerData } from '../../../hooks/use-player-data';
@@ -22,15 +22,16 @@ import { ROUTES } from '../../../routes';
 import { useHistory } from 'react-router-dom';
 import { getUsername } from '../../../utilities/local-storage';
 import { IconSelectOption } from '../IconRadio';
+import { Check } from '@material-ui/icons';
 
 const useStyles = makeStyles<Theme>(() => ({
 	root: {
-		width: '25rem',
-		height: '15rem',
+		padding: '1rem',
+		maxWidth: '400px',
 	},
 	title: {
-		fontFamily: '"Teko", sans-serif',
-		fontSize: '2rem',
+		fontSize: '1.4rem',
+		fontWeight: 500,
 	},
 	container: {
 		margin: '0px',
@@ -38,7 +39,6 @@ const useStyles = makeStyles<Theme>(() => ({
 		height: '100%',
 	},
 	submit: {
-		marginRight: '1rem',
 		marginLeft: 'auto',
 	},
 }));
@@ -62,7 +62,7 @@ const FLAG_OPTION: IconSelectOption<string>[] = Object.entries(FLAG_ICONS).map(
 export const NewGameForm: FC = () => {
 	const classes = useStyles();
 	const history = useHistory();
-	const { register, handleSubmit, control, errors } = useForm<PostNewGame>({
+	const { register, handleSubmit, control } = useForm<PostNewGame>({
 		defaultValues,
 	});
 	const username = getUsername();
@@ -93,10 +93,10 @@ export const NewGameForm: FC = () => {
 				alignItems='center'
 				alignContent='center'
 				className={classes.container}
-				spacing={2}
+				spacing={1}
 			>
 				<Typography className={classes.title} color='textPrimary'>
-					Start a new game
+					Create a game
 				</Typography>
 				<FormRow
 					label='Players'
@@ -119,17 +119,18 @@ export const NewGameForm: FC = () => {
 				<FormRow
 					label='Language'
 					formComponent={
-						<IconRadioGroup
-							name='language'
-							register={register}
-							options={FLAG_OPTION}
-						/>
+						<Grid container>
+							<IconRadioGroup
+								name='language'
+								register={register}
+								options={FLAG_OPTION}
+							/>
+							<IconButton type='submit' className={classes.submit}>
+								<Check />
+							</IconButton>
+						</Grid>
 					}
 				/>
-				<Button type='submit' className={classes.submit}>
-					Let's go!
-				</Button>
-				{errors.usernames && <p>This field is required</p>}
 			</Grid>
 		</Paper>
 	);

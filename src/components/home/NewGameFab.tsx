@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
 	makeStyles,
 	Theme,
@@ -11,11 +11,6 @@ import { NewGameForm } from '../forms/new-game/NewGameForm';
 import AddIcon from '@material-ui/icons/Add';
 
 const useStyles = makeStyles<Theme>(theme => ({
-	root: {
-		top: '50% !important',
-		left: '60% !important',
-		transform: 'translate(-50%, -50%)',
-	},
 	fab: {
 		backgroundColor: theme.palette.secondary.dark,
 		'&:hover': {
@@ -26,30 +21,38 @@ const useStyles = makeStyles<Theme>(theme => ({
 
 export const NewGameFab = (props: GridProps) => {
 	const classes = useStyles();
-	const [open, setOpen] = useState<boolean>(false);
+	const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(
+		null
+	);
 
-	const openPopover = () => {
-		setOpen(true);
+	const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+		setAnchorEl(event.currentTarget);
 	};
 
-	const closePopover = () => {
-		setOpen(false);
+	const handleClose = () => {
+		setAnchorEl(null);
 	};
+
+	const open = Boolean(anchorEl);
 
 	return (
 		<Grid {...props}>
-			<Fab size='small' onClick={openPopover} className={classes.fab}>
+			<Fab size='small' onClick={handleClick} className={classes.fab}>
 				<AddIcon />
 			</Fab>
 			<Popover
-				classes={{
-					root: classes.root,
-					paper: classes.paper,
-				}}
 				open={open}
-				onClose={closePopover}
+				onClose={handleClose}
 				disableRestoreFocus
-				anchorReference='none'
+				anchorEl={anchorEl}
+				anchorOrigin={{
+					vertical: 'top',
+					horizontal: 'left',
+				}}
+				transformOrigin={{
+					vertical: 'bottom',
+					horizontal: 'right',
+				}}
 			>
 				<NewGameForm />
 			</Popover>

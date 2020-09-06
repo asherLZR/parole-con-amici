@@ -4,6 +4,7 @@ import { SelectValue, IconRadio, IconSelectOption } from './IconRadio';
 
 const useStyles = makeStyles<Theme>((theme: Theme) => ({
 	root: {
+		width: 'fit-content',
 		'& label': {
 			'& img': {
 				cursor: 'pointer',
