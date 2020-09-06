@@ -5,19 +5,6 @@ import { Grid, makeStyles, Theme } from '@material-ui/core';
 import { ExitToApp, SvgIconComponent, Face } from '@material-ui/icons';
 
 export const useStyles = makeStyles<Theme>((theme: Theme) => ({
-	root: {
-		width: '100%',
-		height: '100%',
-		padding: '0px',
-		margin: '0px',
-		[theme.breakpoints.up('md')]: {
-			flexDirection: 'column',
-		},
-		[theme.breakpoints.down('sm')]: {
-			flexDirection: 'row',
-			justifyContent: 'space-around',
-		},
-	},
 	menuItem: {
 		[theme.breakpoints.up('md')]: {
 			height: '4rem',
@@ -40,7 +27,7 @@ export const NavbarMenu = () => {
 	const classes = useStyles();
 
 	return (
-		<Grid component='ul' container className={classes.root}>
+		<>
 			{routes.map(route => (
 				<NavMenuItem
 					routeData={route}
@@ -48,6 +35,6 @@ export const NavbarMenu = () => {
 					className={classes.menuItem}
 				/>
 			))}
-		</Grid>
+		</>
 	);
 };

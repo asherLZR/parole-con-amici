@@ -62,7 +62,6 @@ export const NavMenuItem: FC<Props> = ({ routeData, className }: Props) => {
 
 	return (
 		<Grid
-			component='li'
 			item
 			container
 			className={`${classes.root} ${className}`}

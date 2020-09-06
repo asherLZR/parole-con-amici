@@ -26,17 +26,16 @@ export const useStyles = makeStyles<Theme>((theme: Theme) => ({
 			width: '100%',
 			height: NAVBAR_SIZE,
 			bottom: '0%',
+			justifyContent: 'space-around',
 			'&>*': {
 				height: '100%',
+				width: 'fit-content',
 			},
 		},
 	},
 	logoContainer: {
 		[theme.breakpoints.up('md')]: {
 			height: '10%',
-		},
-		[theme.breakpoints.down('sm')]: {
-			width: '30%',
 		},
 	},
 	menu: {
@@ -68,9 +67,7 @@ export const Navbar = () => {
 					<ProfileEmojiAvatar emoji={profile?.emoji} size={LOGO_SIZE} />
 				</Link>
 			</Grid>
-			<Grid item className={classes.menu}>
-				<NavbarMenu />
-			</Grid>
+			<NavbarMenu />
 		</Grid>
 	);
 };
