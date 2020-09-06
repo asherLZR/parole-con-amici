@@ -7,7 +7,7 @@ import { FLAG_ICONS } from '../../constants/images';
 
 const useStyles = makeStyles<Theme>(theme => ({
 	root: {
-		width: '83%',
+		width: '100%',
 		height: 'fit-content',
 		padding: '0.3rem',
 	},

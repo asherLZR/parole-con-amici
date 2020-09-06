@@ -25,7 +25,7 @@ export const GamePreviewCollection = () => {
 		<Grid container alignItems='center' className={classes.root}>
 			{Object.values(games).map((game, i) => {
 				return (
-					<Grid key={i} item md={12} lg={6} xl={4}>
+					<Grid key={i} item md={12} lg={6} xl={4} container justify='center'>
 						<GamePreview gameData={game.gameData} players={allPlayers} />
 					</Grid>
 				);

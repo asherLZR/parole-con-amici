@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import {
 	makeStyles,
 	Theme,
@@ -6,10 +6,7 @@ import {
 	AvatarProps,
 	Avatar,
 } from '@material-ui/core';
-import { useSelector, useDispatch } from 'react-redux';
-import { getProfileData, handleGetProfile } from '../store/players';
 import { hexToEmoji } from '../utilities/hex-to-emoji';
-import { getUsername } from '../utilities/local-storage';
 
 const useStyles = makeStyles<Theme, number>(theme => ({
 	root: {

@@ -17,7 +17,7 @@ export const ProtectedHandler = () => {
 
 	useEffect(() => {
 		dispatch(handleGetProfile(username));
-	}, [dispatch]);
+	}, [dispatch, username]);
 
 	useEffect(() => {
 		const username = getUsername();
