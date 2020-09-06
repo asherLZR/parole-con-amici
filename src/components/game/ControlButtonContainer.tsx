@@ -17,7 +17,7 @@ export const ControlButtonContainer = () => {
 			<RestoreButton movingTiles={movingTiles} />
 			{/* allow play only if the move is valid */}
 			<PlayMoveButton
-				disabled={!isPlayersTurn || !isValidMove}
+				disabled={!isPlayersTurn || !isValidMove || !!gameData?.winner}
 				isPendingSave={isPendingSave}
 				gameId={gameData?.gameId}
 				movingTiles={movingTiles}
