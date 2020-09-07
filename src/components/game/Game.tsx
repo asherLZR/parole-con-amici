@@ -30,7 +30,7 @@ import { isMobile } from 'react-device-detect';
 
 export const useStyles = makeStyles<Theme>(theme => ({
 	root: {
-		marginTop: '1rem',
+		paddingTop: '1rem',
 		'& .MuiIconButton-root': {
 			width: '3.5rem',
 			height: '3.5rem',

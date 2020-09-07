@@ -9,6 +9,7 @@ const useStyles = makeStyles({
 		position: 'fixed',
 		width: '100%',
 		height: '6px', // height of LinearProgress
+		zIndex: 1000
 	},
 });
 

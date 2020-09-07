@@ -20,7 +20,6 @@ export const useStyles = makeStyles<Theme>((theme: Theme) => ({
 		[theme.breakpoints.down('sm')]: {
 			marginBottom: NAVBAR_SIZE,
 		},
-		border: '1px solid transparent', // FIXME: format issues
 	},
 }));
 
