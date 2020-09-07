@@ -71,4 +71,3 @@
 - Allow opponent to validate word and add to personal dictionary
 - Dictionary validation (choose apprpriate ds)
 - Board theme
-- Support Italian words

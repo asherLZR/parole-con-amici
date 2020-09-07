@@ -8,6 +8,7 @@ import { themeMain } from './themes/theme-main';
 import { Provider } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
 import { RootReducer } from './store/root-reducer';
+import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
 	// </React.StrictMode>,
@@ -21,3 +22,5 @@ ReactDOM.render(
 	</MuiThemeProvider>,
 	document.getElementById('root')
 );
+
+serviceWorker.register()
