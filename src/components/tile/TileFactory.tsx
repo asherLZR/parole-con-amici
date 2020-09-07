@@ -2,7 +2,7 @@ import React from 'react';
 import { PopoverTile } from './PopoverTile';
 import { DraggableTile } from './DraggableTile';
 import { Tile } from './Tile';
-import { GridProps } from '@material-ui/core';
+import { GridProps, makeStyles, Theme } from '@material-ui/core';
 import { PlacedTile } from '../../types/GameTypes';
 import { Tiles } from '../../types/TileTypes';
 
@@ -12,6 +12,13 @@ export interface TileFactoryProps extends GridProps {
 	tileset: Tiles;
 }
 
+const useStyles = makeStyles<Theme, boolean>(theme => ({
+	tile: {
+		border: lastPlayed =>
+			lastPlayed ? `1px solid ${theme.palette.secondary.light}` : '',
+	},
+}));
+
 /**
  * Generates tile component based on whether it is a blank, movable, or fixed tile
  */
@@ -20,7 +27,8 @@ export const TileFactory = ({
 	tileset,
 	...props
 }: TileFactoryProps) => {
-	const { movable, isBlank, character } = placedTile;
+	const { movable, isBlank, character, lastPlayed } = placedTile;
+	const classes = useStyles(Boolean(lastPlayed));
 
 	if (movable) {
 		if (isBlank) {
@@ -33,11 +41,14 @@ export const TileFactory = ({
 		);
 	}
 
+	const className = props.className ?? '';
+
 	return (
 		<Tile
 			character={character}
 			score={isBlank ? undefined : tileset[character].points}
 			{...props}
+			className={`${className} ${classes.tile}`}
 		/>
 	);
 };

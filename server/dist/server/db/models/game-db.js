@@ -72,6 +72,7 @@ const updateGameOnNewTurn = (client, gameId, placedTiles, tilesInBag) => __await
         },
         $set: {
             tilesInBag,
+            lastPlayed: placedTiles.map(tile => tile.boardPosition),
         },
     };
     const options = { returnOriginal: false };

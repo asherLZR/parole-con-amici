@@ -9,13 +9,16 @@ exports.toBoardCoords = (index) => ({
 exports.toIndex = ({ row, col }) => {
     return row * board_sizes_1.SQUARES_PER_SIDE + col;
 };
-exports.tilesToBoard = (placedTiles) => {
+exports.tilesToBoard = (placedTiles, lastPlayed) => {
     const board = [...Array(board_sizes_1.SQUARES_PER_SIDE)].map(() => [...Array(board_sizes_1.SQUARES_PER_SIDE)].fill(null));
     placedTiles.forEach((placedTile) => {
         const { boardPosition: position } = placedTile;
         if (position) {
             board[position.row][position.col] = placedTile;
         }
+    });
+    lastPlayed.forEach(({ row, col }) => {
+        board[row][col].lastPlayed = true;
     });
     return board;
 };

@@ -12,7 +12,8 @@ export const toIndex = ({ row, col }: BoardCoords): number => {
 };
 
 export const tilesToBoard = (
-	placedTiles: PlacedTile[]
+	placedTiles: PlacedTile[],
+	lastPlayed: BoardCoords[]
 ): Maybe<PlacedTile>[][] => {
 	const board = [...Array(SQUARES_PER_SIDE)].map(() =>
 		[...Array(SQUARES_PER_SIDE)].fill(null)
@@ -23,6 +24,10 @@ export const tilesToBoard = (
 		if (position) {
 			board[position.row][position.col] = placedTile;
 		}
+	});
+
+	lastPlayed.forEach(({ row, col }) => {
+		board[row][col].lastPlayed = true;
 	});
 
 	return board;
@@ -54,7 +59,7 @@ export const getAdjacentBoardPositions = ({
 	};
 };
 
-/** 
+/**
  * Given the position of a tile on the board, return the inclusive range of the horizontal word formed
  * with that tile
  */
@@ -75,7 +80,7 @@ export const findHorizontalBoundsOfWord = (
 	return { leftIndex, rightIndex };
 };
 
-/** 
+/**
  * Given the position of a tile on the board, return the inclusive range of the vertical word formed
  * with that tile
  */

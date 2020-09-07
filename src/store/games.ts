@@ -11,7 +11,7 @@ export const handleGetPlayersGames = createAsyncThunk(
 		const games = await getPlayersGameData();
 		const map: Record<string, GameState> = {};
 		Object.values(games).forEach(gameData => {
-			const board = tilesToBoard(gameData.tilesOnBoard);
+			const board = tilesToBoard(gameData.tilesOnBoard, gameData.lastPlayed);
 			map[gameData.shortId] = {
 				gameData,
 				board,

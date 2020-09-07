@@ -17,6 +17,7 @@ export const initialGame = (tilesInBag: Tiles, language: Language): Game => ({
 	gamePlayerIds: [],
 	tilesInBag,
 	language,
+	lastPlayed: [],
 });
 
 export const initialGamePlayerState = (

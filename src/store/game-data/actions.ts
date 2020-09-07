@@ -17,10 +17,12 @@ export const handleResetGameData = createAction<void>('RESET_STORE');
 
 export const handleRestoreTiles = createAction<PlacedTile[]>('RESTORE_TILES');
 
-const gameDataToGameState = (gameData: GameData) => {
+export const gameDataToGameState = (gameData: GameData) => {
+	const { tilesOnBoard, lastPlayed, winner } = gameData;
+
 	return {
 		gameData,
-		board: tilesToBoard(gameData.tilesOnBoard),
+		board: tilesToBoard(tilesOnBoard, winner ? [] : lastPlayed),	// add last played tiles only if the game is ongoing
 	};
 };
 

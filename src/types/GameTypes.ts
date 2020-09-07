@@ -21,6 +21,7 @@ export interface Game {
 	gamePlayerIds: string[];
 	tilesInBag: Tiles;
 	language: Language;
+	lastPlayed: BoardCoords[];
 }
 
 export interface OpponentState {
@@ -56,6 +57,7 @@ export interface PlacedTile {
 	boardPosition?: BoardCoords;
 	movable?: boolean;
 	isBlank?: boolean;
+	lastPlayed?: boolean;
 }
 
 export interface BoardCoords {

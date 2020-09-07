@@ -15,6 +15,7 @@ exports.initialGame = (tilesInBag, language) => ({
     gamePlayerIds: [],
     tilesInBag,
     language,
+    lastPlayed: [],
 });
 exports.initialGamePlayerState = (gameId, username, turnOrder, rack) => ({
     username,

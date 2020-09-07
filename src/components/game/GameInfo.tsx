@@ -35,19 +35,21 @@ export const GameInfo = ({ gameData }: Props) => {
 
 	return (
 		<Paper square className={classes.root}>
-			<Typography color='textPrimary'>
-				<Grid container alignItems='center' justify='center'>
-					<IconImage iconSrc={FLAG_ICONS[language]} />
-					<div style={{ marginLeft: '0.7rem' }}>
+			<Grid container alignItems='center' justify='center'>
+				<IconImage iconSrc={FLAG_ICONS[language]} />
+				<div style={{ marginLeft: '0.7rem' }}>
+					<Typography color='textPrimary'>
 						started <b>{getTimeAgo(dateStarted)}</b>
-					</div>
-				</Grid>
-				{winner && (
-					<Grid container className={classes.winnerContainer} justify='center'>
+					</Typography>
+				</div>
+			</Grid>
+			{winner && (
+				<Grid container className={classes.winnerContainer} justify='center'>
+					<Typography color='textPrimary'>
 						<b>{winner}</b>&nbsp;has won
-					</Grid>
-				)}
-			</Typography>
+					</Typography>
+				</Grid>
+			)}
 		</Paper>
 	);
 };

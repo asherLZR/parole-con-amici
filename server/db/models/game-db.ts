@@ -111,6 +111,7 @@ const updateGameOnNewTurn = async (
 		},
 		$set: {
 			tilesInBag,
+			lastPlayed: placedTiles.map(tile => tile.boardPosition),
 		},
 	};
 	const options = { returnOriginal: false };

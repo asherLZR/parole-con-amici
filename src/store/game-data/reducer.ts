@@ -14,11 +14,11 @@ import {
 	snapTileWithinRack,
 	handleRestoreTiles,
 	socketUpdateGame,
+	gameDataToGameState,
 } from './actions';
 import { cloneDeep } from 'lodash';
 import { shuffleArray } from '../../utilities/shuffle-array';
 import { swap } from '../../utilities/swap';
-import { tilesToBoard } from '../../utilities/board-helpers';
 
 /**Selectors */
 export const getIsPendingLoad = (state: RootState) =>
@@ -69,8 +69,10 @@ export const reducer = createReducer(initialState, builder => {
 
 	builder.addCase(socketUpdateGame, (state, action) => {
 		const gameData = action.payload;
-		state.gameData = gameData;
-		state.board = tilesToBoard(gameData.tilesOnBoard);
+		return {
+			...state,
+			...gameDataToGameState(gameData)
+		}
 	});
 
 	builder.addCase(handleMoveTileToBoard, (state, action) => {

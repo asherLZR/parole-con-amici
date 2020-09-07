@@ -1,4 +1,9 @@
-import { PlacedTile, Game, BoardCoords, GameData } from '../../src/types/GameTypes';
+import {
+	PlacedTile,
+	Game,
+	BoardCoords,
+	GameData,
+} from '../../src/types/GameTypes';
 import { Maybe } from '../../src/types/UtilityTypes';
 import { getConnectedClient } from '../db/client';
 import { readGameDataByGameid, updateNewTurn } from '../db/models/game-db';
@@ -56,7 +61,8 @@ export const handlePlayTurn = async (
 			const board = tilesToBoard(
 				initialState.tilesOnBoard.concat(
 					placedTiles.map(tile => ({ ...tile, movable: true }))
-				)
+				),
+				[]
 			);
 			const coords = placedTiles.map(tile => tile.boardPosition as BoardCoords); // TODO: handle invalid argument
 			const score = calculateMoveScore(

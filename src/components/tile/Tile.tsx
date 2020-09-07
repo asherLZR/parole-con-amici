@@ -36,7 +36,7 @@ const useStyles = makeStyles<Theme, { boardVp: number }>(theme => ({
 			top: '40%',
 			left: '10%',
 			margin: '0px',
-			fontSize: `${calculateSquareVp(boardVp) * 0.3}vmin`,
+			fontSize: `${calculateSquareVp(boardVp) * 0.25}vmin`,
 			height: 'fit-content',
 		};
 	},

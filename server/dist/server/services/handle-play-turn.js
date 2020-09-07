@@ -49,7 +49,7 @@ exports.handlePlayTurn = (username, gameId, placedTiles) => __awaiter(void 0, vo
                 }
             });
             // check how much this play is worth
-            const board = board_helpers_1.tilesToBoard(initialState.tilesOnBoard.concat(placedTiles.map(tile => (Object.assign(Object.assign({}, tile), { movable: true })))));
+            const board = board_helpers_1.tilesToBoard(initialState.tilesOnBoard.concat(placedTiles.map(tile => (Object.assign(Object.assign({}, tile), { movable: true })))), []);
             const coords = placedTiles.map(tile => tile.boardPosition); // TODO: handle invalid argument
             const score = calculate_move_score_1.calculateMoveScore(initialState.turns === 0, coords, board, language);
             const updateSuccess = yield game_db_1.updateNewTurn(client, username, gameId, placedTiles, rack, newTilesInBag, score);
