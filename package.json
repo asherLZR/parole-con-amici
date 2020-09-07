@@ -61,7 +61,7 @@
 		"uuid": "^8.1.0"
 	},
 	"scripts": {
-		"tsc": "tsc",
+		"tsc": "tsc --build tsconfig.json",
 		"start": "react-scripts start",
 		"build": "react-scripts build && cp _redirects build/",
 		"test": "react-scripts test --watchAll=true",
@@ -69,7 +69,7 @@
 		"serve": "cd server && ts-node-dev --respawn -r dotenv/config --no-notify server.ts",
 		"build-server": "cd server && tsc --build tsconfig.json",
 		"serve-build": "node server/dist/server/server.js",
-		"heroku-postbuild": "cd server && npm run tsc --build tsconfig.json"
+		"heroku-postbuild": "cd server && npm run tsc"
 	},
 	"eslintConfig": {
 		"extends": "react-app"
