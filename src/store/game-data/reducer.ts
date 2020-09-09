@@ -71,8 +71,8 @@ export const reducer = createReducer(initialState, builder => {
 		const gameData = action.payload;
 		return {
 			...state,
-			...gameDataToGameState(gameData)
-		}
+			...gameDataToGameState(gameData),
+		};
 	});
 
 	builder.addCase(handleMoveTileToBoard, (state, action) => {
@@ -137,8 +137,13 @@ export const reducer = createReducer(initialState, builder => {
 	});
 
 	// TODO: do optimistic rendering here - revert changes on error
-	builder.addCase(handlePostMoveTile.fulfilled, state => {
-		state.isPendingSave = false;
+	builder.addCase(handlePostMoveTile.fulfilled, (state, action) => {
+		const gameData = action.payload;
+		return {
+			...state,
+			isPendingSave: false,
+			...gameDataToGameState(gameData),
+		};
 	});
 
 	builder.addCase(handlePostMoveTile.rejected, state => {

@@ -22,7 +22,7 @@ export const gameDataToGameState = (gameData: GameData) => {
 
 	return {
 		gameData,
-		board: tilesToBoard(tilesOnBoard, winner ? [] : lastPlayed),	// add last played tiles only if the game is ongoing
+		board: tilesToBoard(tilesOnBoard, winner ? [] : lastPlayed), // add last played tiles only if the game is ongoing
 	};
 };
 
@@ -72,19 +72,18 @@ export const handleGetGameData = createAsyncThunk<
 });
 
 export const handlePostMoveTile = createAsyncThunk<
-	boolean,
+	GameData,
 	{ gameId: string; placedTiles: PlacedTile[] }
->('HAND_TO_BOARD', async ({ gameId, placedTiles }) => {
+>('HAND_TO_BOARD', async ({ gameId, placedTiles }, { rejectWithValue }) => {
 	const fixedTiles = placedTiles.map(placedTile => ({
 		...placedTile,
 		movable: false,
 	}));
 
 	try {
-		await postMoveTiles(gameId, fixedTiles);
-		return true;
+		return postMoveTiles(gameId, fixedTiles);
 	} catch (e) {
-		return false;
+		return rejectWithValue('Unable to post move');
 	}
 });
 

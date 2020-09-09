@@ -10,7 +10,7 @@ export const getGameData = (gameId: string): Promise<GameData> => {
 export const postMoveTiles = (
 	gameId: string,
 	placedTiles: PlacedTile[]
-): Promise<void> => {
+): Promise<GameData> => {
 	return fetchApi(`/game/${getUsername()}/${gameId}`, {
 		method: 'POST',
 		headers: { 'Content-Type': 'application/json' },

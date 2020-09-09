@@ -93,10 +93,6 @@ app
 		const callersGame = await handlePlayTurn(username, gameId, placedTiles);
 
 		if (callersGame) {
-			// update caller data with socket
-			app.get('io').to(username).emit(gameId, JSON.stringify(callersGame));
-			console.log('emitting to', username);
-
 			callersGame.opponents.forEach(opponent => {
 				handleReadGameByGameid(gameId, opponent.username)
 					.then(opponentsGame => {
@@ -111,8 +107,7 @@ app
 					.then(e => console.error(e));
 			});
 
-			// send status to caller without data
-			res.sendStatus(200);
+			res.json(callersGame);
 		} else {
 			res.sendStatus(500);
 		}
@@ -136,7 +131,7 @@ app
 		res.json(updatedProfile);
 	});
 
-app.route('/players').get(async (req, res) => {
+app.route('/players').get(async (_req, res) => {
 	const players = (await handleGetAllPlayers()) ?? {};
 	res.json(players);
 });
